@@ -56,7 +56,7 @@ jobs:
       run: npm i -g typescript
 
     - name: copy libzim
-      run: cp libzim/build/src/libzim.8.dylib build/Release/ 
+      run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.dylib build/Release/ 
 
     - name: running test-mem-leak
       run: npm run test-mem-leak
@@ -100,7 +100,7 @@ jobs:
       run: npm i -g typescript
 
     - name: copy libzim
-      run: cp libzim/build/src/libzim.8.dylib build/Release/ 
+      run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.so build/Release/ 
 
     # - name: installing codecov
     #   run: npm i codecov
@@ -155,7 +155,7 @@ jobs:
       run: npm i -g typescript
 
     - name: copy libzim
-      run: cp libzim/build/src/libzim.8.dylib build/Release/ 
+      run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.so build/Release/ 
 
     # - name: installing codecov
     #   run: npm i codecov
