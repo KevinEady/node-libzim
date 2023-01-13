@@ -21,6 +21,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -35,14 +37,26 @@ jobs:
     - name: installing add on packages
       run: brew install ossp-uuid
 
+    - name: setup ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
     - name: setting path
       run: PATH=$PATH:$HOME/bin
 
+    - name: installing meson
+      run: pip3 install meson
+
+    - name: configure and build libzim
+      run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
+    
     - name: installing dependencies
       run: npm i
 
     - name: installing typescript
       run: npm i -g typescript
+
+    - name: copy libzim
+      run: cp libzim/build/src/libzim.8.dylib build/Release/ 
 
     - name: running test-mem-leak
       run: npm run test-mem-leak
@@ -56,6 +70,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -65,14 +81,26 @@ jobs:
     - name: installing add on packages
       run: sudo apt install gcc g++ python3-pip libbz2-dev ccache zlib1g-dev uuid-dev
 
+    - name: setup ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
     - name: setting path
       run: PATH=$PATH:$HOME/bin
+
+    - name: installing meson
+      run: pip3 install meson
+
+    - name: configure and build libzim
+      run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
 
     - name: installing dependencies
       run: npm i
 
     - name: installing typescript
       run: npm i -g typescript
+
+    - name: copy libzim
+      run: cp libzim/build/src/libzim.8.dylib build/Release/ 
 
     # - name: installing codecov
     #   run: npm i codecov
@@ -97,6 +125,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        submodules: recursive
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -106,14 +136,26 @@ jobs:
     - name: installing add on packages
       run: sudo apt install gcc g++ python3-pip libbz2-dev ccache zlib1g-dev uuid-dev
 
+    - name: setup ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
     - name: setting path
       run: PATH=$PATH:$HOME/bin
+
+    - name: installing meson
+      run: pip3 install meson
+
+    - name: configure and build libzim
+      run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
 
     - name: installing dependencies
       run: npm i
 
     - name: installing typescript
       run: npm i -g typescript
+
+    - name: copy libzim
+      run: cp libzim/build/src/libzim.8.dylib build/Release/ 
 
     # - name: installing codecov
     #   run: npm i codecov
