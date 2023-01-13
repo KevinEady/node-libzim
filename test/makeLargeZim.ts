@@ -35,15 +35,15 @@ console.log(`Making ZIM file with [${numArticles}] articles`);
     //const data = faker.lorem.paragraphs(10);
     const data = `hello world ${i}`;
 
-    const stringItem = new StringItem(
-      url,
-      "text/html",
-      title,
-      {FRONT_ARTICLE: 1},
-      data,
-    );
+    // const stringItem = new StringItem(
+    //   url,
+    //   "text/html",
+    //   title,
+    //   {FRONT_ARTICLE: 1},
+    //   data,
+    // );
 
-    /*
+
     const customItem = { // custom item
       path: url,
       mimeType: "text/html",
@@ -63,9 +63,9 @@ console.log(`Making ZIM file with [${numArticles}] articles`);
         };
       },
     };
-    */
 
-    await creator.addItem(stringItem);
+
+    await creator.addItem(customItem);
   }
 
   console.log(`Finalising...`);
