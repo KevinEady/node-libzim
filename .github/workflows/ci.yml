@@ -147,11 +147,11 @@ jobs:
     - name: setting path
       run: PATH=$PATH:$HOME/bin
 
-    - name: installing meson
-      run: pip3 install meson
+    # - name: installing meson
+    #   run: pip3 install meson
 
-    - name: configure and build libzim
-      run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
+    # - name: configure and build libzim
+    #   run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
 
     - name: installing dependencies
       run: npm i
@@ -159,8 +159,8 @@ jobs:
     - name: installing typescript
       run: npm i -g typescript
 
-    - name: copy libzim
-      run: ls -l libzim/build/src && ls -l build/Release && cp libzim/build/src/libzim.so.8 build/Release/ 
+    # - name: copy libzim
+    #   run: ls -l libzim/build/src && ls -l build/Release && cp libzim/build/src/libzim.so.8 build/Release/ 
 
     # - name: installing codecov
     #   run: npm i codecov
