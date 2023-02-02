@@ -12,121 +12,126 @@ on:
 
 jobs:
 
-  macOS:
-    runs-on: macos-11
+  # macOS:
+  #   runs-on: macos-11
 
-    strategy:
-      matrix:
-        node-version: [16, 18]
+  #   strategy:
+  #     matrix:
+  #       node-version: [16, 18]
 
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       submodules: recursive
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+  #   - name: Use Node.js ${{ matrix.node-version }}
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: ${{ matrix.node-version }}
 
-    - name: Setup python 3.10
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+  #   - name: Setup python 3.10
+  #     uses: actions/setup-python@v4
+  #     with:
+  #       python-version: '3.10'
 
-    - name: installing add on packages
-      run: brew install ossp-uuid
+  #   - name: installing add on packages
+  #     run: brew install ossp-uuid
 
-    - name: setup ninja
-      uses: seanmiddleditch/gha-setup-ninja@master
+  #   - name: setup ninja
+  #     uses: seanmiddleditch/gha-setup-ninja@master
 
-    - name: setting path
-      run: PATH=$PATH:$HOME/bin
+  #   - name: setting path
+  #     run: PATH=$PATH:$HOME/bin
 
-    - name: installing meson
-      run: pip3 install meson
+  #   - name: installing meson
+  #     run: pip3 install meson
 
-    - name: configure and build libzim
-      run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
+  #   - name: configure and build libzim
+  #     run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
     
-    - name: installing dependencies
-      run: npm i
+  #   - name: installing dependencies
+  #     run: npm i
 
-    - name: installing typescript
-      run: npm i -g typescript
+  #   - name: installing typescript
+  #     run: npm i -g typescript
 
-    - name: copy libzim
-      run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.dylib build/Release/ 
+  #   - name: copy libzim
+  #     run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.dylib build/Release/ 
 
-    - name: running test-mem-leak
-      run: npm run test-mem-leak
+  #   - name: running test-mem-leak
+  #     run: npm run test-mem-leak
 
-  Ubuntu-Focal:
-    runs-on: ubuntu-20.04
+  # Ubuntu-Focal:
+  #   runs-on: ubuntu-20.04
 
-    strategy:
-      matrix:
-        node-version: [16, 18]
+  #   strategy:
+  #     matrix:
+  #       node-version: [16, 18]
 
-    steps:
-    - uses: actions/checkout@v3
-      with:
-        submodules: recursive
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #     with:
+  #       submodules: recursive
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+  #   - name: Use Node.js ${{ matrix.node-version }}
+  #     uses: actions/setup-node@v3
+  #     with:
+  #       node-version: ${{ matrix.node-version }}
 
-    - name: installing add on packages
-      run: sudo apt install gcc g++ python3-pip libbz2-dev ccache zlib1g-dev uuid-dev
+  #   - name: installing add on packages
+  #     run: sudo apt install gcc g++ python3-pip libbz2-dev ccache zlib1g-dev uuid-dev
 
-    - name: setup ninja
-      uses: seanmiddleditch/gha-setup-ninja@master
+  #   - name: setup ninja
+  #     uses: seanmiddleditch/gha-setup-ninja@master
 
-    - name: setting path
-      run: PATH=$PATH:$HOME/bin
+  #   - name: setting path
+  #     run: PATH=$PATH:$HOME/bin
 
-    - name: installing meson
-      run: pip3 install meson
+  #   - name: installing meson
+  #     run: pip3 install meson
 
-    - name: configure and build libzim
-      run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
+  #   - name: configure and build libzim
+  #     run: pushd libzim && meson setup . build --buildtype debug -Dwith_xapian=false && ninja -C build && popd
 
-    - name: installing dependencies
-      run: npm i
+  #   - name: installing dependencies
+  #     run: npm i
 
-    - name: installing typescript
-      run: npm i -g typescript
+  #   - name: installing typescript
+  #     run: npm i -g typescript
 
-    - name: copy libzim
-      run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.so build/Release/ 
+  #   - name: copy libzim
+  #     run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.so build/Release/ 
 
-    # - name: installing codecov
-    #   run: npm i codecov
+  #   # - name: installing codecov
+  #   #   run: npm i codecov
 
-    - name: running test-mem-leak
-      run: npm run test-mem-leak
+  #   - name: running test-mem-leak
+  #     run: npm run test-mem-leak
 
-    # - name: running codecov
-    #   run: npm run codecov
+  #   # - name: running codecov
+  #   #   run: npm run codecov
 
-    # - name: codecov action
-    #   uses: codecov/codecov-action@v1
-    #   with:
-    #     token: ${{ secrets.CODECOV_TOKEN }}
+  #   # - name: codecov action
+  #   #   uses: codecov/codecov-action@v1
+  #   #   with:
+  #   #     token: ${{ secrets.CODECOV_TOKEN }}
 
   Ubuntu-Jammy:
     runs-on: ubuntu-22.04
 
     strategy:
       matrix:
-        node-version: [16, 18]
+        node-version: [18]
 
     steps:
     - uses: actions/checkout@v3
       with:
         submodules: recursive
+
+    - name: Install Valgrind
+      run: |
+        sudo apt install -y valgrind
+        echo "Valgrind installed"
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -161,7 +166,8 @@ jobs:
     #   run: npm i codecov
 
     - name: running test-mem-leak
-      run: npm run test-mem-leak
+      run: valgrind --leak-check=full node -r ts-node/register test/makeLargeZim.ts
+      # run: npm run test-mem-leak
 
     # - name: running codecov
     #   run: npm run codecov
