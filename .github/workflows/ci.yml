@@ -160,7 +160,7 @@ jobs:
       run: npm i -g typescript
 
     - name: copy libzim
-      run: ls -l libzim/build/src && cp libzim/build/src/libzim.8.so build/Release/ 
+      run: ls -l libzim/build/src && ls -l build/Release && cp libzim/build/src/libzim.so.8 build/Release/ 
 
     # - name: installing codecov
     #   run: npm i codecov
