@@ -166,7 +166,7 @@ jobs:
     #   run: npm i codecov
 
     - name: running test-mem-leak
-      run: node -r ts-node/register test/makeLargeZim.ts
+      run: valgrind --leak-check=full --num-callers=50 node -r ts-node/register test/makeLargeZim.ts
       # run: npm run test-mem-leak
 
     # - name: running codecov
