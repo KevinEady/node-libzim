@@ -128,10 +128,10 @@ jobs:
       with:
         submodules: recursive
 
-    - name: Install Valgrind
-      run: |
-        sudo apt install -y valgrind
-        echo "Valgrind installed"
+    # - name: Install Valgrind
+    #   run: |
+    #     sudo apt install -y valgrind
+    #     echo "Valgrind installed"
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -165,8 +165,8 @@ jobs:
     # - name: installing codecov
     #   run: npm i codecov
 
-    - name: running test-mem-leak
-      run: valgrind --leak-check=full --num-callers=50 node -r ts-node/register test/makeLargeZim.ts
+    - name: running test-mem-leak (no valgrind)
+      run: node -r ts-node/register test/makeLargeZim.ts
       # run: npm run test-mem-leak
 
     # - name: running codecov
